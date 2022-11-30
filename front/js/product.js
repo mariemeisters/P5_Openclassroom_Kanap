@@ -1,15 +1,15 @@
 // variable permettant de récupérer l'id du produit dans l'URL de la page actuelle 
 const productId = new URL(location.href).searchParams.get("id");
 
-fetchProductPage();
+//-----------------------------------------------------------------------------------------------------
+fetchProductPage(); // -- (ligne ≈ 198)                                                                               //
 /** (Fonctions appelées dans la fonction fetch)
- *  ↳ displayItem();
- *  ↳ getProductForCart();
+ *  ↳ displayItem(); -- (ligne ≈ 50) 
+ *  ↳ getProductForCart();  -- (ligne ≈ 99) 
  *      (fonction appelées dans la fonction "getProductForCart")    
- *          ↳ triProduct();
- *          ↳ saveCart();
-*/
-
+ *          ↳ triProduct();  -- (ligne ≈ 148) 
+ *          ↳ saveCart(); -- (ligne ≈ 162) 
+*/ 
 // ----------------------------------------------------------------------------------------------------
 
 /**
@@ -47,7 +47,6 @@ function fetchProductPage() {
  * - et déclare qu'il s'agit d'un enfant de select
 */
 function displayItem(product){
-            
     document.title = product.name;
     let imgItem = document.querySelector(".item__img"); 
     let imgCreate = document.createElement("img"); 
