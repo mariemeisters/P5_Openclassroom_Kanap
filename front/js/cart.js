@@ -260,8 +260,8 @@ function calculTotalProduct () {
 function calculTotalPrice() { // calcul du produit, s'il est présent dans le panier, selon les conditions, 
     let cart = getItemCart();
     let totalPriceCart = 0;
- 
-    for (i = 0; i < cart.length && i < productForPrice.length; i++) { 
+    
+    for (i = 0; i < cart.length && i < productForPrice.length; i++) {
         if (cart[i]._id === productForPrice[i].id && cart[i].color != productForPrice[i].color || 
             cart[i]._id === productForPrice[i].id && cart[i].color === productForPrice[i].color)
             totalPriceCart += cart[i].quantity * productForPrice[i].price;
