@@ -14,13 +14,14 @@ function fetchApiProduct () {
     fetch("http://localhost:3000/api/products") 
         .then((resultes) => resultes.json()) 
         .then((productList) => { 
+            console.log(productList)
             displayProductList(productList); 
         })
         .catch((error) => {
             console.log("Oups, il y a eu un problème > ",`${error.message}`); 
         });
 }
-    /**
+/**
  * Fonction affichage (page d'accueil) d'insertion dynamique des produits dans le DOM
  * Récupère l'élément parent de l'article grâce à son ID
  * Boucle pour parcourir les informations itérables reçues de la requête Fetch (kanap) et créer les éléments dans le DOM

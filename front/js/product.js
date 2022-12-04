@@ -117,8 +117,8 @@ function getProductForCart(product) {
             alert("Veuillez sélectionner une couleur et une quantité supérieure à 0 et inférieure à 100 :)")
         } else if (productDataCart.color == "") { 
             alert("Veuillez sélectionner une couleur :)");
-        } else if (productDataCart.quantity <= 0 || productDataCart.quantity > 101)   {
-            alert("Veuillez choisir une quantité supérieure à 0 et inférieure à 100 :)");
+        } else if (productDataCart.quantity <= 0 || productDataCart.quantity >= 101)   {
+            alert("Veuillez choisir une quantité supérieure à 0 et inférieure à 101 :)");
         } else {  
             let cart = JSON.parse(localStorage.getItem("cart"));
             if (cart != null) {

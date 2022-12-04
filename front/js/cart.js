@@ -7,7 +7,7 @@ initCartWithProduct(); // (ligne ≈ 30)                                        
 //      ↳ modifyQuantity(); -- (ligne ≈ 198)                                                   -
 //      ↳ removeProduct(); -- (ligne ≈ 223)                                                    -
 //  ↳ calculTotalProduct(); -- (ligne ≈ 241)                                                   -       
-//  ↳ calculTotalPrice(); -- (ligne ≈ 260)                               APPEL DES FONCTIONS   -
+//  ↳ calculTotalPrice(); -- (ligne ≈ 258)                               APPEL DES FONCTIONS   -
 removeForm() // (ligne ≈ 280)                                                                  -
 //  ↳ cartEmpty() -- (ligne ≈ 302)                                                             -
 conditionForm(); // -- (ligne ≈ 353)                                                           -                                                                   
@@ -195,7 +195,7 @@ function displayCartItem(productCart) {
   * Déclare que la quantité dans le panier est maintenant égale à la valeur choisie par l'utilisateur
   * Sauvegarde les informations dans le local storage
   */
- function modifyQuantity(productCart, event){   
+function modifyQuantity(productCart, event){   
     let cart = getItemCart();
     let article = productCart.closest("article"); 
     let newQuantity = Number(event.target.value); 
@@ -220,7 +220,7 @@ function displayCartItem(productCart) {
  * Calcul du nombre total prix et produit
  * Lance la fonction removeForm() s'il s'agissait du dernier produit du panier 
 */
- function removeProduct(productCart) {
+function removeProduct(productCart) {
     let cart = getItemCart();
     for( let i = 0, lengt = cart.length; i < lengt; i++){ 
         const cartAfterFilter = cart.filter((elementNewCart) => elementNewCart.id !== productCart._id || elementNewCart.color !== productCart.color);
@@ -252,20 +252,17 @@ function calculTotalProduct () {
  * Récupère les produit dans le panier (fonction get Local storage)
  * ProductForPrice est le tableau dans lequel les informations (dont le prix) des produits ont été push en amont
  * Définie que le prix total est de 0
- * Boucle pour rechercher dans panier en vérifiant tous les objets (utilisation de length)
- * Condition : - si l'ID du produit = l'ID de productForPrice (PFP) et que la couleur du produit est différente de PFP
- *             - si l'ID du produit = l'ID de PFP et que la couleur dans le panier = la couleur de PFP
- * calcul du prix total, affectation après addition : quantité dans le panier (du produit) * prix dans le PFP (du même produit)
+ * Boucle pour rechercher dans panier et le tableau des prix, avec la condition : si l'ID correspond, calcul du prix
+ * calcul du prix total, affectation après addition : quantité dans le panier (du produit) * prix dans le tableau prix (du même produit)
  */
-function calculTotalPrice() { // calcul du produit, s'il est présent dans le panier, selon les conditions, 
+function calculTotalPrice() { // calcul du produit, s'il est présent dans le panier
     let cart = getItemCart();
     let totalPriceCart = 0;
-    
     for (i = 0; i < cart.length && i < productForPrice.length; i++) {
-        if (cart[i]._id === productForPrice[i].id && cart[i].color != productForPrice[i].color || 
-            cart[i]._id === productForPrice[i].id && cart[i].color === productForPrice[i].color)
+        if (cart[i]._id === productForPrice[i].id){
             totalPriceCart += cart[i].quantity * productForPrice[i].price;
         }
+    }
     const totalProductPrice = document.querySelector("#totalPrice");
     totalProductPrice.textContent = totalPriceCart; 
 }
@@ -409,7 +406,7 @@ function conditionForm() {
 /**
  * Fonction permettant à l'utilisateur de confirmer sa commande
  * Selection avec querySelector de l'ID Order
- * Evenement au clic -- si les conditions du formulaire sont vide, message d'erreur personnalisé
+ * Evenement au clic -- si les éléments du formulaire sont vide, message d'erreur personnalisé
  * Sinon, si le formulaire est remplis (donc après vérif des éléments du formulaire)
  * Appel la fonction d'envoi de commande *  
  */
