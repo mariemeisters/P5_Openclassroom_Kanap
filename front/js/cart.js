@@ -252,16 +252,18 @@ function calculTotalProduct () {
  * Récupère les produit dans le panier (fonction get Local storage)
  * ProductForPrice est le tableau dans lequel les informations (dont le prix) des produits ont été push en amont
  * Définie que le prix total est de 0
- * Boucle pour rechercher dans panier et le tableau des prix, avec la condition : si l'ID correspond, calcul du prix
+ * Boucle for of permettant de parcourir le tableau des prix des produits
+ * Boucle qui parcour les éléments du panier avec la condition : si le nom et la couleur du panier sont égales au nom et à la couleur dans le tableau de prix 
  * calcul du prix total, affectation après addition : quantité dans le panier (du produit) * prix dans le tableau prix (du même produit)
  */
-function calculTotalPrice() { // calcul du produit, s'il est présent dans le panier
+ function calculTotalPrice() { // calcul du produit, s'il est présent dans le panier
     let cart = getItemCart();
     let totalPriceCart = 0;
-    for (i = 0; i < cart.length && i < productForPrice.length; i++) {
-        if (cart[i]._id === productForPrice[i].id){
-            totalPriceCart += cart[i].quantity * productForPrice[i].price;
-        }
+    for (let product of productForPrice) {
+        for (i = 0; i < cart.length ; i++) {
+            if (cart[i].id === product._id && cart[i].color === product.color)
+                totalPriceCart += cart[i].quantity * product.price;
+            }
     }
     const totalProductPrice = document.querySelector("#totalPrice");
     totalProductPrice.textContent = totalPriceCart; 
