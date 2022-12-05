@@ -263,7 +263,7 @@ function calculTotalProduct () {
         for (i = 0; i < cart.length ; i++) {
             if (cart[i].id === product._id && cart[i].color === product.color)
                 totalPriceCart += cart[i].quantity * product.price;
-            }
+        }
     }
     const totalProductPrice = document.querySelector("#totalPrice");
     totalProductPrice.textContent = totalPriceCart; 
